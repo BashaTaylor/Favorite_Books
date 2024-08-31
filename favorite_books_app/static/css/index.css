@@ -89,14 +89,14 @@ ul {
     display: flex;
     justify-content: center; /* Center align buttons horizontally */
     gap: 10px; /* Space between buttons */
-    margin: 30px 0 20px 0;
+    margin: 20px 0 45px 0;
     width: 100%; /* Ensure button-wrapper takes full width */
 }
 
 .btn {
     background-color: blue;
     color: whitesmoke;
-    padding: 10px 20px; /* Adds padding to the buttons */
+    padding: 8px 15px; /* Adds padding to the buttons */
     border: none; /* Removes the default border */
     border-radius: 7px; /* Rounds the corners of the buttons */
     cursor: pointer; /* Changes the cursor to a pointer on hover */
@@ -126,3 +126,4 @@ ul {
     font-weight: bold;
     font-size: 18px;
 }
+

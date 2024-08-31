@@ -2,6 +2,9 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib import messages
 from .models import Book, User
 import bcrypt
+import logging
+
+logger = logging.getLogger(__name__)
 
 def log_and_reg(request):
     """Renders the login and registration page"""
@@ -59,22 +62,63 @@ def index(request):
     return render(request, 'index.html', context)  # Ensure this renders 'index.html'
 
 def add_book(request):
-    """Handles adding a new book and redirects to the book list (books.html)"""
+    """Handles adding a new book and redirects to the book list."""
     if request.method == 'POST':
+        # Use book_validator to check for errors
         errors = Book.objects.book_validator(request.POST)
+        
         if errors:
-            for val in errors.values():
-                messages.error(request, val)
-            return redirect('/index')  # Redirect back to add book page (index.html) if there are errors
-        else:
-            my_user = User.objects.get(id=request.session['userid'])
-            new_book = Book.objects.create(
-                title=request.POST['title'], 
-                description=request.POST['description'],
-                uploaded_by=my_user
-            )
-            my_user.liked_books.add(new_book)
-            return redirect('/books')  # Redirect to books.html after adding the book
+            # Display validation errors as messages
+            for error in errors.values():
+                messages.error(request, error)
+            # Redirect to the form page to show errors
+            return redirect('/index')
+        
+        # Ensure user is logged in and session contains a valid user ID
+        user_id = request.session.get('userid')
+        if not user_id:
+            messages.error(request, "User not logged in.")
+            return redirect('/login')  # Redirect to login page if user ID is missing
+
+        try:
+            my_user = User.objects.get(id=user_id)
+        except User.DoesNotExist:
+            messages.error(request, "User does not exist.")
+            return redirect('/login')  # Redirect to login page if user is not found
+        
+        # Create a new book
+        new_book = Book.objects.create(
+            title=request.POST['title'],
+            description=request.POST['description'],
+            uploaded_by=my_user
+        )
+        
+        # Optionally add the book to the user's liked books
+        my_user.liked_books.add(new_book)
+        
+        # Redirect to the book list page
+        return redirect('/books')
+    
+    # For GET requests, render the book addition form
+    return render(request, 'index.html')
+
+# def add_book(request):
+#     """Handles adding a new book and redirects to the book list (books.html)"""
+#     if request.method == 'POST':
+#         errors = Book.objects.book_validator(request.POST)
+#         if errors:
+#             for val in errors.values():
+#                 messages.error(request, val)
+#             return redirect('/index')  # Redirect back to add book page (index.html) if there are errors
+#         else:
+#             my_user = User.objects.get(id=request.session['userid'])
+#             new_book = Book.objects.create(
+#                 title=request.POST['title'], 
+#                 description=request.POST['description'],
+#                 uploaded_by=my_user
+#             )
+#             my_user.liked_books.add(new_book)
+#             return redirect('/books')  # Redirect to books.html after adding the book
 
 def list_books(request):
     """Renders the page to list all books (books.html)"""
@@ -135,15 +179,23 @@ def edit(request, book_id):
     
     return render(request, 'edit.html', context)
 
+#This function finally worked! :)
+def delete_book(request, book_id):
+    """Handles the deletion of a book."""
+    if 'userid' not in request.session:
+        return redirect('/')  # Redirect to login page if user is not logged in
 
-def delete(request, book_id):
-    """Deletes a book and redirects to the list of books."""
-    if request.method == 'POST':
-        book = get_object_or_404(Book, id=book_id)
-        book.delete()
-        return redirect('list_books')  # Redirect to the book list after deletion
-    return redirect('list_books')  # Optionally handle non-POST requests
+    book = get_object_or_404(Book, id=book_id)
+    
+    # Optional: Check if the current user is allowed to delete the book
+    if book.uploaded_by.id != request.session['userid']:
+        messages.error(request, "You are not authorized to delete this book.")
+        return redirect('/books')
 
+    # Delete the book
+    book.delete()
+    messages.success(request, "Book deleted successfully.")
+    return redirect('/books')
 
 def update(request, book_id):
     """Handles updating the book and redirects to the book list page."""

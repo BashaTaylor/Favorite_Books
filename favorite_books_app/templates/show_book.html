@@ -6,23 +6,53 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% load static %}
-    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <link rel="stylesheet" href="{% static 'css/show_book.css' %}">
     <title>{{ book.title }}</title>
 </head>
 
 <body>
     <div class="container">
         <div class="header">
-            <h1>Welcome, {{user.first_name}} {{user.last_name}}!</h1><br>
-
-            <div class="links"><a href="{% url 'list_books' %}">Back</a> | <a id="log_out" href="/">Log Out</a></div>
+            <h1>Welcome, {{ current_user.first_name }} {{ current_user.last_name }}!</h1><br>
+            <div class="links">
+                <a href="{% url 'list_books' %}">Go Back</a> | <a id="log_out" href="/">Log Out</a>
+            </div>
         </div>
 
         <div class="main">
-            <h1>{{ book.title }}</h1>
-            <p>Descriptions: {{ book.description }}</p>
-            <p>Added by: {{ book.uploaded_by.first_name }} {{ book.uploaded_by.last_name }}</p>
+            <div class="content">
+                <h2>{{ book.title }}</h2>
+                <div>
+                    <h3>Descriptions: </h3>
+                    <p>{{ book.description }}</p>
+                </div>
+                <div>
+                    <h3>Added by: </h3>
+                    <p>{{ book.uploaded_by.first_name }} {{ book.uploaded_by.last_name }}</p>
+                </div>
+                
+                <div>
+                    <h3>Added on: </h3>
+                    <p>{{ book.created_at|date:"F j, Y, g:i a" }}</p>
+                </div>
 
+                <div>
+                    <h3>Updated on: </h3>
+                    <p>{{ book.updated_at|date:"F j, Y, g:i a" }}</p>
+                </div>
+
+                <div>
+                    <h3>Favorited by:</h3>
+                    <p>{% if book.users_who_like.all %}
+                            {% for user in book.users_who_like.all %}
+                                {{ user.first_name }} {{ user.last_name }}{% if not forloop.last %}, {% endif %}
+                            {% endfor %}
+                        {% else %}
+                            No one
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
             <div class="button-wrapper">
                 <!-- Link to the edit page for the book -->
                 <a href="{% url 'edit_book' book.id %}" class="btn">Edit</a>
