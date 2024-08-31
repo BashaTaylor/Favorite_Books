@@ -26,20 +26,58 @@
     border-radius: 10px; /* Optional: Rounds the corners of the main div */
 }
 
+.links, a {
+    color: whitesmoke;
+    margin: 30px 0 30px 0;
+}
+
 h1 {
     color: rgb(15, 190, 29)
 }
 
 .main {
     display: flex;
+    justify-content: space-between; /* Space out the columns */
+    gap: 20px; /* Space between the columns */
     flex-direction: column;
-    align-items: center;
+    /* align-items: center; */
     color: whitesmoke;
     margin: 40px;
     background-color: #333; /* Optional: Adds a background color for better contrast */
     padding: 20px; /* Adds padding inside the main div */
     border-radius: 10px; /* Optional: Rounds the corners of the main div */
     width: 100%;
+}
+
+/* Header for All Books inside the main div */
+.all_books_header {
+    margin-bottom: 20px; /* Space below the header */
+    text-align: center;
+}
+
+/* Container for the two columns */
+.books-container {
+    display: flex; /* Use flexbox for layout */
+    gap: 20px; /* Space between columns */
+    justify-content: space-between; /* Space out the columns */
+}
+
+.my_favorite_books, .other_books {
+    flex: 1; /* Make both columns take up equal width */
+    border: 1px solid #ccc; /* Optional: Add border around columns */
+    padding: 25px; /* Optional: Add padding inside columns */
+    margin: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: Add subtle shadow */
+    border-radius: 10px; /* Optional: Add rounded corners */
+    /* background-color: #424242; */
+    background-color: whitesmoke;
+    border-color: rgb(37, 37, 37);
+    
+}
+
+/* Add some spacing and layout styling inside each list item */
+.list {
+    margin-bottom: 10px; /* Space between books */
 }
 
 #two_divs {
@@ -60,6 +98,10 @@ h1 {
 h1, h2 {
     color: rgb(15, 190, 29);
     margin: 20px 0 30px 0;
+}
+
+h2 {
+    text-align: center;
 }
 
 label {
@@ -108,11 +150,13 @@ h3 {
     padding-right: 20px; /* Increase space between h3 and p */
 }
 
+
+
 p, a {
     margin: 0;
     flex: 1;
     font-size: large;
-    color: whitesmoke;
+    color: black;
 }
 
 .button-group {
@@ -139,6 +183,7 @@ p, a {
     transition: background-color 0.3s; /* Smooth transition for background color on hover */
     max-width: 150px; /* Set a max-width for buttons */
     text-align: center; /* Center text inside buttons */
+    text-decoration: none;
 }
 
 .btn:hover {

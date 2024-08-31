@@ -121,14 +121,24 @@ def add_book(request):
 #             return redirect('/books')  # Redirect to books.html after adding the book
 
 def list_books(request):
-    """Renders the page to list all books (books.html)"""
+    """Displays a list of all books, separated into favorites and others."""
     if 'userid' not in request.session:
-        return redirect('/')
+        return redirect('/')  # Redirect to login page if user is not logged in
+
+    current_user = User.objects.get(id=request.session['userid'])
+    all_books = Book.objects.all()
+
+    # Separate books into favorites and others
+    my_favorite_books = [book for book in all_books if current_user in book.users_who_like.all()]
+    other_books = [book for book in all_books if current_user not in book.users_who_like.all()]
+
     context = {
-        'user': User.objects.get(id=request.session['userid']),
-        'all_books': Book.objects.all(),
+        'user': current_user,
+        'my_favorite_books': my_favorite_books,
+        'other_books': other_books,
     }
-    return render(request, 'books.html', context)  # This renders 'books.html'
+
+    return render(request, 'books.html', context)
 
 def show_one(request, book_id):
     """Displays the details of a single book."""

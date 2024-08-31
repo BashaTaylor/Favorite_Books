@@ -40,7 +40,7 @@
     color: whitesmoke;
     margin: 30px;
     background-color: #333; /* Optional: Adds a background color for better contrast */
-    padding: 30px; /* Adds padding inside the main div */
+    padding: 20px; /* Adds padding inside the main div */
     border-radius: 10px; /* Optional: Rounds the corners of the main div */
     width: 95%;
 }
@@ -88,7 +88,7 @@ ul {
     display: flex;
     justify-content: center; /* Center align buttons horizontally */
     gap: 10px; /* Space between buttons */
-    margin: 20px 0 45px 0;
+    margin-top: 20px;
     width: 100%; /* Ensure button-wrapper takes full width */
 }
 
