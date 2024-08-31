@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <title>Add a Book @index</title>
+</head>
+
+<body>
+    <div class="container">
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        <div class="header">
+            <h1>Welcome, {{user.first_name}} {{user.last_name}}!</h1>
+            <div class="links">
+                <a href="books">Go to Books</a> | <a href="/">Log Out</a>
+            </div>
+        </div>
+        <div class="main">
+            <h2>Add a Favorite Book</h2>
+            
+            <form action="/books/add" method="POST">
+                {% csrf_token %}
+                <div id="two_divs">
+                    <div class='favorite_div'>
+                        <label class="title_control" for="title">Title: </label>
+                        <input class="form-group" type="text" name="title" class="description">
+                    </div>
+                    <div class='favorite_div'>
+                        <label for="description" class="title_control">Description: </label>
+                        <textarea class="form-group" name="description" type="text" class="description" cols="34" rows="3"></textarea>
+                    </div>
+                </div>
+            
+            <div class="button-wrapper">
+                <button class="btn" type="submit">Add New Book</button>
+            </div>
+        </form>
+            
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/log_and_reg.css' %}">
+    <title>Login and Registration</title>
+</head>
+
+<body>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <div class="container">
+        <div class="main">
+            <div id="registration">
+                <h1>Register</h1>
+                <form class="style_form" action="/register" method="POST">
+                    <!-- add csrf token -->
+                    {% csrf_token %}
+                    <label>First Name: <input type="text" name="first_name"></label>
+                    <label>Last Name: <input type="text" name="last_name"></label>
+                    <label>Email: <input type="text" name="email"> </label>
+                    <label>Password: <input type="password" name="password"></label>
+                    <label>Confirm Password: <input type="password" name="confirm_password"></label>
+                    <div class="button-wrapper">
+                        <button class="btn" type="submit" value="register">Register</button>
+                    </div>
+                </form>
+            </div>
+            <div id="login">
+                <h1>Login</h1>
+                <form class="style_form" action="/login" method="POST">
+                    {% csrf_token %}
+                    <label>Email: <input type="text" name="email"></label>
+                    <label>Password: <input type="password" name="password"></label>
+                    <div class="button-wrapper">
+                        <button type="submit" class="btn">Log In</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="bottom">
+            <p id="quote">“The more that you read, the more things you will know. The more that you learn, the more
+                places you'll go.” <br> ― Dr. Seuss</p>
+        </div>
+    </div>
+</body>
+
+</html>

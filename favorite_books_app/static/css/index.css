@@ -1,0 +1,128 @@
+@import url("https://fonts.googleapis.com/css?family=Lora:400,400i,700");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Ensures padding and borders are included in the element's total width and height */
+    font-family: Lora, serif;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: black;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px;
+    width: 100%;
+    background-color:#333;
+    color: white;
+    padding: 10px 30px 10px 30px;
+    border-radius: 10px; /* Optional: Rounds the corners of the main div */
+}
+
+
+
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: whitesmoke;
+    margin: 40px;
+    background-color: #333; /* Optional: Adds a background color for better contrast */
+    padding: 20px; /* Adds padding inside the main div */
+    border-radius: 10px; /* Optional: Rounds the corners of the main div */
+    width: 100%;
+}
+
+#two_divs {
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.main2 {
+    display: flex;
+    flex-direction: row;
+    
+}
+
+h1, h2 {
+    color: rgb(15, 190, 29) ;
+}
+
+h1 {
+    margin: 20px 0 30px 0;
+}
+
+label {
+    font-size: 16px;
+    font-weight: normal;
+}
+
+input, textarea {
+    border-radius: 7px;
+    padding: 7px;
+    font-size: 16px;
+    width: 100%; /* Ensure inputs take full width within their containers */
+}
+
+textarea {
+    resize: vertical; /* Allow vertical resizing */
+}
+
+ul {
+    color: whitesmoke;
+    font-weight: normal;
+    font-size: 16px;
+    margin-bottom: 20px;
+    list-style: none; /* Remove default list styling */
+    padding: 0; /* Remove default padding */
+}
+
+.button-wrapper {
+    display: flex;
+    justify-content: center; /* Center align buttons horizontally */
+    gap: 10px; /* Space between buttons */
+    margin: 30px 0 20px 0;
+    width: 100%; /* Ensure button-wrapper takes full width */
+}
+
+.btn {
+    background-color: blue;
+    color: whitesmoke;
+    padding: 10px 20px; /* Adds padding to the buttons */
+    border: none; /* Removes the default border */
+    border-radius: 7px; /* Rounds the corners of the buttons */
+    cursor: pointer; /* Changes the cursor to a pointer on hover */
+    font-size: 16px; /* Increases the font size */
+    transition: background-color 0.3s; /* Smooth transition for background color on hover */
+    max-width: 150px; /* Set a max-width for buttons */
+    text-align: center; /* Center text inside buttons */
+}
+
+.btn:hover {
+    background-color: darkblue; /* Changes the background color on hover */
+}
+
+.links, a {
+    color: whitesmoke;
+    margin: 30px 0 30px 0;
+}
+
+
+.favorite_div {
+    width: 100%;
+    margin: 15px;
+    flex-direction: row;
+}
+
+.title_control {
+    font-weight: bold;
+    font-size: 18px;
+}

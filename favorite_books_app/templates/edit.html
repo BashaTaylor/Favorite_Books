@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <title>Edit Book</title>
+</head>
+
+<body>
+    <div class="container">
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li class="{{ message.tags }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <div class="header">
+            <h1>Welcome, {{user.first_name}} {{user.last_name}}!</h1>
+            <div class="links">
+                <a href="{% url 'list_books' %}">Go to Books</a> | <a href="{% url 'logout' %}">Log Out</a>
+            </div>
+        </div>
+
+        <div class="main">
+            <h2>Edit Book</h2>
+            <form action="{% url 'update_book' book.id %}" method="POST">
+                {% csrf_token %}
+                <div class="favorite_div">
+                    <label for="title" class="title_control">Title:</label>
+                    <input type="text" name="title" value="{{ book.title }}">
+                </div>
+                <div class="favorite_div">
+                    <label for="description" class="title_control">Description:</label>
+                    <textarea class="form-group" name="description" cols="34" rows="3">{{ book.description }}</textarea>
+                </div>
+                <div class="button-wrapper">
+                    <button class="btn" type="submit">Update</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
