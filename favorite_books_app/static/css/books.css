@@ -64,15 +64,11 @@ h1 {
 
 .my_favorite_books, .other_books {
     flex: 1; /* Make both columns take up equal width */
-    border: 1px solid #ccc; /* Optional: Add border around columns */
+    border: 1px solid #8c8c8c; /* Optional: Add border around columns */
     padding: 25px; /* Optional: Add padding inside columns */
     margin: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: Add subtle shadow */
+    box-shadow: 4px 4px 4px rgba(238, 232, 232, 0.57); /* Optional: Add subtle shadow */
     border-radius: 10px; /* Optional: Add rounded corners */
-    /* background-color: #424242; */
-    background-color: whitesmoke;
-    border-color: rgb(37, 37, 37);
-    
 }
 
 /* Add some spacing and layout styling inside each list item */
@@ -97,7 +93,7 @@ h1 {
 
 h1, h2 {
     color: rgb(15, 190, 29);
-    margin: 20px 0 30px 0;
+    margin: 15px 0 5px 0;
 }
 
 h2 {
@@ -156,7 +152,7 @@ p, a {
     margin: 0;
     flex: 1;
     font-size: large;
-    color: black;
+    color: whitesmoke;
 }
 
 .button-group {
