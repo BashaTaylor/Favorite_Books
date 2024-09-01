@@ -82,6 +82,11 @@ ul {
     width: 100%; /* Ensure button-wrapper takes full width */
 }
 
+.button-group {
+    display: flex;
+    gap: 10px; /* Adjust spacing between buttons as needed */
+}
+
 .btn {
     background-color: blue;
     color: whitesmoke;
