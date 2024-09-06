@@ -79,7 +79,7 @@ ul {
     color: black;
     font-weight: normal;
     font-size: 16px;
-    margin-bottom: 20px;
+    margin: 20px 0 20px 20px;
     list-style: none; /* Remove default list styling */
     padding: 0; /* Remove default padding */
 }
