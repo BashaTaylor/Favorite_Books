@@ -26,7 +26,8 @@ SECRET_KEY = config('SECRET_KEY', default='fallback_key')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['Favorite_Books.onrender.com', 'localhost']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'favorite-books.onrender.com']
+
 
 
 # Application definition
